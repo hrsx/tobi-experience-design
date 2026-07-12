@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リサーチを提案に変える ── エートス・インサイト・余白</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #121212;
+    --ink: #f2f0eb;
+    --dim: #9a968e;
+    --faint: #4a4741;
+    --line: #35322d;
+    --accent: #c8b98a;
+    --serif: 'Shippori Mincho', 'Noto Serif JP', serif;
+    --sans: 'Zen Kaku Gothic New', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: var(--bg); color: var(--ink); font-family: var(--serif); overflow: hidden; }
+  .deck { position: relative; width: 100vw; height: 100vh; }
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7vh 10vw;
+    opacity: 0;
+  }
+  .slide.active { display: flex; animation: fadein .55s ease forwards; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .kicker {
+    font-family: var(--sans);
+    font-size: clamp(13px, 1.3vw, 16px);
+    letter-spacing: .32em;
+    color: var(--dim);
+    margin-bottom: 2.2em;
+  }
+  h1 {
+    font-size: clamp(38px, 5.2vw, 64px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: .04em;
+  }
+  h2 {
+    font-size: clamp(30px, 3.6vw, 46px);
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: .05em;
+    margin-bottom: 1.1em;
+  }
+  p, li {
+    font-size: clamp(19px, 1.9vw, 26px);
+    line-height: 1.9;
+    letter-spacing: .03em;
+    color: var(--ink);
+    max-width: 34em;
+  }
+  .dim { color: var(--dim); }
+  .accent { color: var(--accent); }
+  em { font-style: normal; border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+  ul.plain { list-style: none; }
+  ul.plain li { padding-left: 1.4em; text-indent: -1.4em; margin-bottom: .55em; }
+  ul.plain li::before { content: "\2500\2500"; color: var(--faint); margin-right: .55em; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; }
+  .cols.wideleft { grid-template-columns: 1.15fr 1fr; }
+  .note {
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.3vw, 17px);
+    line-height: 1.85;
+    color: var(--dim);
+    border-left: 1px solid var(--line);
+    padding-left: 1.4em;
+    margin-top: 2.4em;
+    max-width: 44em;
+  }
+  .num {
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.3vw, 16px);
+    letter-spacing: .28em;
+    color: var(--accent);
+    margin-bottom: 1.6em;
+  }
+  figure { width: 100%; }
+  figure svg { width: 100%; height: auto; display: block; }
+  .footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 32px;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: .2em; color: var(--faint);
+    z-index: 10;
+    user-select: none;
+  }
+  .progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; transition: width .4s ease; z-index: 11; }
+  .bigline {
+    font-size: clamp(32px, 3.8vw, 52px);
+    line-height: 1.8;
+    font-weight: 500;
+    letter-spacing: .06em;
+    max-width: 24em;
+  }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; margin-top: 1em; }
+  .pair .box { border-top: 1px solid var(--line); padding-top: 1.4em; }
+  .pair h3 {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.4vw, 17px);
+    letter-spacing: .24em;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 1.2em;
+  }
+  .pair p, .pair li { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.85; }
+  @media (max-width: 820px) {
+    .slide { padding: 8vh 8vw; }
+    .cols, .cols.wideleft, .pair { grid-template-columns: 1fr; gap: 5vh; }
+    figure { max-width: 520px; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 タイトル -->
+  <section class="slide active">
+    <div class="kicker">エクスペリエンスデザイン 2026 ── リサーチ課題</div>
+    <h1>リサーチを提案に変える<br><span class="dim" style="font-size:.62em">── エートス・インサイト・余白</span></h1>
+    <p class="dim" style="margin-top:3.2em; font-family:var(--sans); font-size:clamp(13px,1.3vw,16px); letter-spacing:.2em;">共通セッション ── 全チーム</p>
+  </section>
+
+  <!-- 2 二つの失敗 -->
+  <section class="slide">
+    <div class="num">01 ── まとめ方の二つの失敗</div>
+    <h2>「調べてまとめた」と<br>「絵に描いた餅」</h2>
+    <p>リサーチの提案では、大きく二つの失敗があります。ひとつは、調べたことを並べて終わる発表。もうひとつは、調べたこととは関係なく「こうなったらいいね」と理想を描く発表です。</p>
+    <p style="margin-top:1em;">逆の失敗に見えるけど根は同じで、どちらも<em>リサーチで見つけた構造と、最終提案の道筋が途切れています</em>。前者は構造を見つけたのに手を入れてない。後者は手を入れてるけど、構造とつながっていません。</p>
+  </section>
+
+  <!-- 差し込み チームの外にひらく -->
+  <section class="slide">
+    <div class="num">02 ── 机の上だけで完結させない</div>
+    <h2>チームで話してAIに聞くだけでは、<br>「誰でもできるリサーチ」になる。</h2>
+    <p>机を囲んでみんなで話して、その場でAIに聞いて調べる。これだけで進めると、出てくるのは<em>誰がやっても似たようなリサーチのバリエーションのひとつ</em>にしかなりません。みんなが使うAIに、似たような問いを投げているから当然です。</p>
+    <p style="margin-top:1em;">自分たちにしか出せない結果になるのは、問いをチームの外にひらいたとき。現場に行く、人に会って聞く、自分の身体で確かめる。<em>チームの外から一次情報を取り込んで、そのリサーチは初めてユニークになります</em>。</p>
+  </section>
+
+  <!-- 3 AIの重ね合わせ -->
+  <section class="slide">
+    <div class="num">03 ── 前提 ── AIはひとつの答えを持っていない</div>
+    <div class="cols">
+      <div>
+        <h2 style="margin-bottom:.9em;">最初の答えは、<br>唯一の正解ではない。</h2>
+        <p>AIの中では、複数の矛盾する情報が同時に保持されています。こちらの聞き方や与えた文脈が、そのうちのひとつを答えとして確定させます。</p>
+        <p style="margin-top:1em;">つまり最初に出てきた答えは、その聞き方に対するひとつの答えにすぎません。最初の出力に満足するということは、<em>別の可能性を自分から捨てること</em>になります。</p>
+      </div>
+      <figure>
+        <svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" font-family="'Zen Kaku Gothic New',sans-serif">
+          <circle cx="230" cy="105" r="82" fill="none" stroke="#35322d" stroke-width="1"/>
+          <text x="230" y="40" fill="#9a968e" font-size="11.5" text-anchor="middle" letter-spacing="2">重ね合わせ状態の知識</text>
+          <text x="188" y="92" fill="#f2f0eb" font-size="12" text-anchor="middle" opacity=".85">答え a</text>
+          <text x="272" y="86" fill="#f2f0eb" font-size="12" text-anchor="middle" opacity=".6">答え b</text>
+          <text x="206" y="128" fill="#f2f0eb" font-size="12" text-anchor="middle" opacity=".7">答え c</text>
+          <text x="268" y="138" fill="#f2f0eb" font-size="12" text-anchor="middle" opacity=".5">答え d</text>
+          <line x1="152" y1="196" x2="112" y2="278" stroke="#c8b98a" stroke-width="1.2"/>
+          <polygon points="109,285 108,274 118,278" fill="#c8b98a"/>
+          <text x="92" y="238" fill="#c8b98a" font-size="11.5" text-anchor="middle">聞き方 A</text>
+          <line x1="308" y1="196" x2="348" y2="278" stroke="#c8b98a" stroke-width="1.2"/>
+          <polygon points="351,285 342,278 352,274" fill="#c8b98a"/>
+          <text x="368" y="238" fill="#c8b98a" font-size="11.5" text-anchor="middle">聞き方 B</text>
+          <rect x="40" y="293" width="145" height="52" rx="3" fill="#1c1b18" stroke="#9a968e" stroke-width="1"/>
+          <text x="112" y="315" fill="#f2f0eb" font-size="12" text-anchor="middle">収束した答え A</text>
+          <text x="112" y="334" fill="#9a968e" font-size="10.5" text-anchor="middle">単体では一貫して見える</text>
+          <rect x="278" y="293" width="145" height="52" rx="3" fill="#1c1b18" stroke="#9a968e" stroke-width="1"/>
+          <text x="350" y="315" fill="#f2f0eb" font-size="12" text-anchor="middle">収束した答え B</text>
+          <text x="350" y="334" fill="#9a968e" font-size="10.5" text-anchor="middle">これも一貫して見える</text>
+          <text x="230" y="372" fill="#4a4741" font-size="11" text-anchor="middle" letter-spacing="2">文脈が違えば、収束先も違う</text>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4 エートス -->
+  <section class="slide">
+    <div class="num">04 ── エートス ── 違和感を手放さない力</div>
+    <h2>エートス。環境で育つ、<br>言語化できない判断力。</h2>
+    <p>エートスとは、才能や生まれつきの感覚ではありません。特定の環境のなかでの試行錯誤の積み重ねによって育つ、言語化しきれない判断力のことで、「目利き」や「審美眼」といった能力に近い。エートスは鍛錬でき、学習しながら、成長させることができます。</p>
+    <p style="margin-top:1em;">たとえばリサーチの場面で、もっともらしい答え──AIの出力でも、先行研究でも、自分たちの仮説でも──を前にしたとき、すぐに納得せず、立ち止まり、引っかかりを保留したままにしておく。<em>この「つまづき」が、結論を急ぐことより大事です</em>。</p>
+  </section>
+
+  <!-- 5 インサイト -->
+  <section class="slide">
+    <div class="num">05 ── インサイト ── 違和感の言語化</div>
+    <h2>「◯◯だと思っていたが、<br>実は△△だった」。</h2>
+    <p>「違和感」は生のものです。まだ言葉になっていない、自分でも説明しきれない引っかかり。それをリサーチのデータと突き合わせて、他人に伝わる形にしたものが「インサイト」です。</p>
+    <p style="margin-top:1em;">パターンは<em>「◯◯だと思っていたが、実は△△だった」</em>という反転で、この反転がないものはインサイトではなく、ただの要約のことが多い。違和感が出発点で、インサイトはその言語化された姿。これら二つは連続しています。</p>
+  </section>
+
+  <!-- 6 余白 -->
+  <section class="slide">
+    <div class="num">06 ── 余白とは何か</div>
+    <h2>使う人が動ける幅を、<br>提案で残しておく。</h2>
+    <p>余白とは、提案を受け取った人が、自分で判断したり、考えて行動したり、続きを作ったりできる幅のこと。提案ですべてを決めてしまうと、受け取る側は、書かれた通りに実行するか、無視するかの二択しか残りません。だから、すべて説明するわけではないが、何も決めないわけでもない。</p>
+    <p style="margin-top:1em;">リサーチで見つけた構造は、たいてい<em>ひとつの正解には収まらない</em>。せっかくの発見を、無理に一つの解決策へ閉じると、発見そのものと矛盾する。余白とは、装飾のバランスではなく、構造に対して誠実であること。</p>
+  </section>
+
+  <!-- 7 余白 線引き -->
+  <section class="slide">
+    <div class="num">07 ── 何を決めて、何を委ねるか</div>
+    <h2 style="margin-bottom:.7em;">軸を決める。余白は残しておく。</h2>
+    <p style="max-width:46em; margin-bottom:1.6em;">余白は「何も決めないこと」ではありません。それはただの丸投げで、絵に描いた餅の別バージョンです。<em>軸は明確に決める。残りは意図して開けておく</em>。この線引きが、余白の中身になります。</p>
+    <div class="pair" style="margin-top:0;">
+      <div class="box">
+        <h3>決める</h3>
+        <ul class="plain">
+          <li>どの構造に手を入れるか</li>
+          <li>なぜそこなのか</li>
+          <li>手を入れると何を失うか</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>委ねる</h3>
+        <ul class="plain">
+          <li>具体的な運用や見た目</li>
+          <li>誰がどう使うか</li>
+          <li>どちらの側に立つか</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">悪い余白＝「みんなで考えていきましょう」で終わる。悪い閉じ＝「このアプリを作れば解決します」で終わる。いい提案は、介入する軸だけを名指しして、その先を開けておく。</p>
+  </section>
+
+  <!-- 8 構造図 -->
+  <section class="slide">
+    <div class="num">08 ── 三つの関係</div>
+    <div class="cols wideleft">
+      <div>
+        <h2 style="margin-bottom:.9em;">違和感に気づき、<br>インサイトを削り出し、<br>余白を残して置く。</h2>
+        <p>エートスは「見つけた何か」ではなく、プロセスで働く力。違和感を安易な答えにせずに保つ力であり、インサイトを提案に落とすときに閉じすぎを防ぐ力でもあります。</p>
+        <p style="margin-top:1em;">余白とは、最後の着地の仕方のこと。三つは同じ層のものではなく、このプロセスで関係します。</p>
+      </div>
+      <figure>
+        <svg viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg" font-family="'Zen Kaku Gothic New',sans-serif">
+          <rect x="130" y="40" width="180" height="52" rx="3" fill="none" stroke="#9a968e" stroke-width="1"/>
+          <text x="220" y="63" fill="#f2f0eb" font-size="13" text-anchor="middle">違和感</text>
+          <text x="220" y="82" fill="#9a968e" font-size="10.5" text-anchor="middle">まだ言葉にならない引っかかり</text>
+          <line x1="220" y1="98" x2="220" y2="152" stroke="#9a968e" stroke-width="1"/>
+          <polygon points="220,158 215,148 225,148" fill="#9a968e"/>
+          <rect x="130" y="164" width="180" height="52" rx="3" fill="none" stroke="#9a968e" stroke-width="1"/>
+          <text x="220" y="187" fill="#f2f0eb" font-size="13" text-anchor="middle">インサイト</text>
+          <text x="220" y="206" fill="#9a968e" font-size="10.5" text-anchor="middle">反転の形をした発見</text>
+          <line x1="220" y1="222" x2="220" y2="276" stroke="#9a968e" stroke-width="1"/>
+          <polygon points="220,282 215,272 225,272" fill="#9a968e"/>
+          <rect x="130" y="288" width="180" height="52" rx="3" fill="none" stroke="#c8b98a" stroke-width="1.2"/>
+          <text x="220" y="311" fill="#c8b98a" font-size="13" text-anchor="middle">提案 ＝ 余白のある着地</text>
+          <text x="220" y="330" fill="#9a968e" font-size="10.5" text-anchor="middle">軸を動かし、残りは委ねる</text>
+          <path d="M 88 66 C 52 130, 52 250, 88 314" fill="none" stroke="#c8b98a" stroke-width="1" stroke-dasharray="3 5"/>
+          <text x="46" y="196" fill="#c8b98a" font-size="12" text-anchor="middle" writing-mode="tb" letter-spacing="4">エートス</text>
+          <text x="220" y="384" fill="#4a4741" font-size="11" text-anchor="middle" letter-spacing="2">エートスは道中ずっと働く力、余白は着地の仕方です</text>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 9 主体と時間 -->
+  <section class="slide">
+    <div class="num">09 ── 行き詰まったときの二つの操作</div>
+    <h2>主体の位置を変える。<br>時間を代入する。</h2>
+    <ul class="plain" style="margin-top:.4em;">
+      <li><strong>語る主体の位置を変える。</strong>いま誰の位置から見て語っているのか。その位置を一段ずらします。観察している側から、されている側へ。声が大きい人から、声が届かない人へ。いまの利用者から、まだ現れていない利用者へ。</li>
+      <li><strong>時間を代入する。</strong>いつの話をしているのか。出来事が起きた瞬間だけでなく、起きる前の時間、起きたあとに残る時間。静止した属性ではなく、流れとしての経験。</li>
+    </ul>
+    <p class="note">この二つは、この授業でずっと言ってきた「経験は時間のなかで、その人の身体を現場にして立ち上がる」の実践版になります。誰の、いつの経験を見ているのかを動かすと、同じデータから別の構造が見えてきます。</p>
+  </section>
+
+  <!-- 10 結び -->
+  <section class="slide">
+    <div class="kicker">CLOSING</div>
+    <p class="bigline">提案とは、発見した構造に<br>介入するための仮説。<br>調べたことと最後の提案が、<br>必然でつながるように。</p>
+  </section>
+
+</div>
+<div class="footer">
+  <span>TO-BI EXPERIENCE DESIGN 2026 — RESEARCH ISSUES</span>
+  <span><span id="pagenum">1</span> / <span id="pagetotal"></span>　←→ / CLICK</span>
+</div>
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const pagenum = document.getElementById('pagenum');
+  document.getElementById('pagetotal').textContent = slides.length;
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    pagenum.textContent = i + 1;
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+  document.getElementById('deck').addEventListener('click', e => {
+    const x = e.clientX / window.innerWidth;
+    x < 0.25 ? show(i - 1) : show(i + 1);
+  });
+  show(0);
+</script>
+</body>
+</html>

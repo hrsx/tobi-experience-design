@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エクスペリエンスデザイン 2026 ── リサーチ課題</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #121212;
+  --ink: #f2f0eb;
+  --dim: #9a968e;
+  --line: #35322d;
+  --accent: #c8b98a;
+  --serif: 'Shippori Mincho', 'Noto Serif JP', serif;
+  --sans: 'Zen Kaku Gothic New', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+body { font-family: var(--serif); padding: 8vh 8vw; }
+main { max-width: 1080px; margin: 0 auto; }
+.kicker {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: .28em;
+  color: var(--dim);
+  margin-bottom: 2.4em;
+}
+h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.45;
+  letter-spacing: .04em;
+  margin: 0 0 1.2em;
+}
+.lead {
+  color: var(--dim);
+  font-size: clamp(17px, 1.8vw, 23px);
+  line-height: 1.9;
+  max-width: 34em;
+  margin-bottom: 3.5em;
+}
+.list {
+  border-top: 1px solid var(--line);
+}
+.item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.item:hover .title,
+.item:focus-visible .title { color: var(--accent); }
+.num {
+  font-family: var(--sans);
+  color: var(--accent);
+  letter-spacing: .16em;
+  font-size: 13px;
+}
+.title {
+  font-size: clamp(20px, 2.3vw, 30px);
+  line-height: 1.5;
+  transition: color .2s ease;
+}
+.meta {
+  font-family: var(--sans);
+  color: var(--dim);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.note {
+  margin-top: 3em;
+  color: var(--dim);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 680px) {
+  body { padding: 7vh 7vw; }
+  .item { grid-template-columns: 48px 1fr; gap: 14px; }
+  .meta { grid-column: 2; }
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">TO-BI EXPERIENCE DESIGN 2026</div>
+  <h1>リサーチ課題<br>フィードバック資料</h1>
+  <p class="lead">共通セッションと、各チームへのフィードバックを閲覧できます。各ページは、画面の右側をクリックするか、キーボードの矢印キーで進みます。</p>
+
+  <nav class="list" aria-label="資料一覧">
+    <a class="item" href="./common.html">
+      <span class="num">00</span>
+      <span class="title">共通：エートス・インサイト・余白</span>
+      <span class="meta">11 slides</span>
+    </a>
+    <a class="item" href="./pill.html">
+      <span class="num">01</span>
+      <span class="title">ピルチーム</span>
+      <span class="meta">6 slides</span>
+    </a>
+    <a class="item" href="./space-and-feeling.html">
+      <span class="num">02</span>
+      <span class="title">空間と気持ちチーム</span>
+      <span class="meta">7 slides</span>
+    </a>
+    <a class="item" href="./recognition.html">
+      <span class="num">03</span>
+      <span class="title">承認欲求チーム</span>
+      <span class="meta">7 slides</span>
+    </a>
+    <a class="item" href="./museum.html">
+      <span class="num">04</span>
+      <span class="title">博物館チーム</span>
+      <span class="meta">7 slides</span>
+    </a>
+  </nav>
+
+  <p class="note">公開先：GitHub Pages。HTMLファイルはすべて単体で動作し、外部ファイルはGoogle Fontsのみです。</p>
+</main>
+</body>
+</html>
